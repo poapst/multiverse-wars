@@ -1,0 +1,21 @@
+#maps-index
+  %h1 Galaxy Map
+  .turn
+    %span turn:
+    %span.value 1
+  .player
+    %span player:
+    %span.value 1
+    %span /2
+  .score
+    %span score:
+    %span P1 =>
+    %span.p1Value 0
+    %span , P2 =>
+    %span.p2Value 0
+  %button.next Next Turn
+  .move
+    %span.msg Click on planet to move units from...
+    %input{:type => "number", :value => 1}
+    %button Move Units
+  .map
