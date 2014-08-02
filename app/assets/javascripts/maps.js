@@ -16,7 +16,6 @@ function changeMoveStateFromUnit(unit) {
 function reDraw(mapSelector, players) {
     calculateAllCoords(players[0].units);
     calculateAllCoords(players[1].units);
-    console.log(players);
     mapData(mapSelector, "unitsP1", function(canvas, xScale, yScale) {
         drawUnits(canvas, xScale, yScale, players[0].color, players[0].units, function(d) {changeMoveStateFromUnit(d);});
     });
@@ -28,6 +27,7 @@ function reDraw(mapSelector, players) {
 function getTurnValue() {
     return $("#maps-index .turn .value");
 }
+
 function getPlayerValue() {
     return $("#maps-index .player .value");
 }
@@ -52,27 +52,22 @@ function setMoveMessage(message) {
 }
 
 function capturePlanet(players, unit) {
-    console.log(unit);
     if(!unit.planetEnd.unit || unit.planetEnd.unit.number <= 0) { //undefined or invalid pointer => colonized new planet
         var newUnit = createUnit(unit.player, unit.planetEnd, 0);
         transferUnits(unit, newUnit, unit.number);
         players[unit.player].units.push(newUnit);
-        console.log("Colonized new planet");
     } else if(unit.planetEnd.unit.player == unit.player) { //add reinforcements
         transferUnits(unit, unit.planetEnd.unit, unit.number);
-        console.log("Add reinforcements");
     } else {    //try conquering planet
         if(unit.number <= unit.planetEnd.unit.number) {    //failed to conquer
             unit.planetEnd.unit.number -= unit.number;
             unit.number = 0;
-            console.log("Failed to conquer planet");
         } else {    //successful conquer
             unit.number -= unit.planetEnd.unit.number;
             unit.planetEnd.unit.number = 0;
             var newUnit = createUnit(unit.player, unit.planetEnd, 0);
             transferUnits(unit, newUnit, unit.number);
             players[unit.player].units.push(newUnit);
-            console.log("Successfully conquered planet");
         }
     }
 }
@@ -88,7 +83,6 @@ function updateScore(players) {
 }
 
 function calculateTurn(mapSelector, planets, players) {
-    console.log("Turn " + getTurnValue().text());
     updateScore(players);
     $.each(planets, function(i, planet) {
         if(planet.unit && planet.unit.number > 0) {
@@ -117,7 +111,7 @@ function calculateTurn(mapSelector, planets, players) {
 }
 
 function changeMoveState(planet) {
-    if(moveState) { //second click
+    if(moveState && planet != moveState.planetStart) { //second click
         moveState.planetEnd = planet;
         setMoveMessage("Planets chosen! Choose number of units to move and complete move.");
     } else if(planet.unit && planet.unit.player == Number(getPlayerValue().text()) - 1) {    //first click
@@ -131,7 +125,6 @@ ready(function() {
     var seed = new Date().getTime();
     var threshold = 0.02;
     var speed = 3;
-    console.log(seed);
     var data = createPlanets(seed, threshold, [], -20, -20, 40, 40);
 
     //create players
