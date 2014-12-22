@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Rails multiverse: development" uuid="1fd0f269-cedd-4048-9a24-612a67b3b7c5">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\xampp\htdocs\multiverse\db\development.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\xampp\htdocs\multiverse-wars\multiverse-wars\db\development.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>

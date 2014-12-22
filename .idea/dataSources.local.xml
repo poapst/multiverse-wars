@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails multiverse: development" uuid="1fd0f269-cedd-4048-9a24-612a67b3b7c5">
+      <secret-storage>memory</secret-storage>
+    </data-source>
+  </component>
+</project>
